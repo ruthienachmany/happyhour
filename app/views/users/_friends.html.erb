@@ -1,0 +1,13 @@
+<% if @user.friends %> 
+<% for friend in @user.friends %>
+<li>
+  <%= link_to "#{friend.name}", user_path(friend.id) %>
+  who works at
+  <%=  link_to "#{friend.workplace.name}", workplace_path(friend.workplace.id) %>
+<% end %>
+
+
+<% else %>
+<%= "no friends yet - start adding some!" %>
+<%end%> 
+

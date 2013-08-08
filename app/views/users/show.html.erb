@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @user.name %></h1><br>
+<h3>Works at</h3>
+<%= @user.workplace.name %><br>
+<%= @user.workplace.location.address1 %><br>
+<%= @user.workplace.location.address2 %><br>
+<%= @user.workplace.location.city %><br>
+<%= @user.workplace.location.state %><br>
+<%= @user.workplace.location.zip %><br>
+<h3> Friends of <%= @user.name %></h3>
+<ul><%= render 'friends' %></ul>
+<h3> People who friended <%= @user.name %></h3>
+<ul><%= render 'friendsof' %></ul>
+
+
+
+<p><%= link_to "See all users", users_path %></p>
+
+
+
+<br>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

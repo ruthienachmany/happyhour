@@ -1,0 +1,25 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| user.name %>
+  <tr><td><%= user.name %> 
+    
+    <%= link_to 'Show', user %> 
+    <%= link_to 'Edit', edit_user_path(user) %>
+    <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+  <div class="span3">
+  <a href="#" class="btn btn-large btn-block btn-info">Info Button</a>
+  </div>
+<%= link_to 'New User', new_user_path %>
+

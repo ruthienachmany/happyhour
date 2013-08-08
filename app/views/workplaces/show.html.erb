@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @workplace.name %></h1><br>
+<%= @workplace.location.address1 %><br>
+<%= @workplace.location.address2 %><br>
+<%= @workplace.location.city %><br>
+<%= @workplace.location.state %><br>
+<%= @workplace.location.zip %><br>
+
+<h3> See all employees </h3>
+  <li>
+    <ul>
+    <% if @workplace.users %> 
+    <% for employee in @workplace.users %>  
+      <%= employee.name %>
+      <% end %>
+      <% end %>
+    </ul>
+  </li>
+<h3> See who else works here... maybe friend them! </h3>
+  <li>
+    <ul>  
+      <!-- @workplace.employees.all -- do i want this? -->
+      All people
+    </ul>
+  </li>
+
+<br>
+<%= link_to 'Edit', edit_workplace_path(@workplace) %> |
+<%= link_to 'Back', workplaces_path %>
