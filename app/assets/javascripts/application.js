@@ -22,3 +22,4 @@
 //= require ../../../vendor/assets/javascripts/bootstrap-tooltip.js
 //= require ../../../vendor/assets/javascripts/jquery.placeholder.js
 //= require ../../../vendor/assets/javascripts/application.js
+//= require leaflet

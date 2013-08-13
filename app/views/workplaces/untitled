@@ -1,0 +1,57 @@
+sidekiq md
+
+I decided to try a different approach to learning new topics in Ruby and Rails in this blog post. I've come to the realization that some of the practices I've developed over years of doing social science-related research for a range of target audiences (e.g. professors, research institutions, nonprofits, community-based organizations, internal strategy teams and external Fortune 500 clients) need to be tweaked when teaching myself new topics and tools in programming. 
+
+My TA [Jeff Baird](http://learnwithjeff.com/) gave me some great advice for building these new muscles that he used when learning himself. To hone the type of methodical problem-solving needed in teaching yourself Ruby and Rails, he suggested that I practice writing 
+[Stack Overflow](http://stackoverflow.com) questions (for my non-programming friends, this is a site where people post technical questions and problems). This requires you to be very clear about 
+
+* What the exact problem you are trying to solve is
+* Why you are trying to solve it
+* Which part you're stuck on
+* What you tried so far
+* And why
+* The code you're working with
+* And what each part does
+
+**^ All of which can be a challenge for beginners. **
+
+I decided to add an extra element to this approach, and keep track of those questions and thoughts in a running blog post. That blog post is now evolving into this.
+
+
+Over the past two days, I used this new approach to teach myself how to set up background jobs using [Sidekiq](https://github.com/mperham/sidekiq/wiki) with [Redis](http://redis.io/) (a data structure server), how to create cron jobs using [Whenever](https://github.com/javan/whenever), and how to get those cron jobs to be sent to the queue in the external server and and executed by Sidekiq workers. You can read more about it [here](http://ruthienachmany.github.io/).
+
+(For background: At Flatiron School, we're working on web apps right now.  My team is working on a web app to tell the story of the Flatiron School through student-generated data sources. So basically - a lot of third-party authentication, scraping and parsing, data visualization, digital storytelling, and as of yesterday, background processing and cron jobs).
+
+First, I watched the relevant Railscasts a few times in a row. Every time I didn't understand something, I wrote it  down here. 
+
+Some examples of these scratch notes:
+
+* threads? instead of processes? 
+* is sidekiq based on a client request to a uri or is it happening whether or not it was requested
+* threadsafe?
+* do i need to be thinking about production because this is a server?
+* avoid sharing data that is mutable between instances in your code and all libraries your code uses
+* sidekiq automatically retries a job if there is an error - will this be a problem with Twitter rate limits
+* multi-threaded environment, concurrency in ruby
+* celluloid - use or not? celluloid - "this is really the key to a sidekiq's multithreaded behavior"
+* mutex?
+* how to move items from sidekiq into a database in rail* 
+* what is called in perform*
+*  when using sidekiq and whenever, do you put cron jobs in worker or in schedule.rb?
+*  remember to serialize objects you pass into redis
+*  state?
+
+Some of these are just thoughts or comments from my research on using these libraries. Others are questions about how I might approach this problem. Yet others are questions I might want or have to consider in the future, like thread safety and multi-threaded environments, but which would have to be tabled until Sidekiq and Whenever were up and running. In this process, I got a chance to research some topics I'd been hearing about but wasn't sure what exactly they meant in the context of a Rails app. In other cases, I discovered something new. 
+
+For some, I wasn't sure whether they would be important to understand right now until I learned more about them. Even if it turned out that they weren't the tools I needed to wield at the moment, they helped me ground my understanding. For example, threading, which is part of what differentiates Sidekiq from some other popular background processing frameworks. After a number of warnings about why it was important to be thread-safe and descriptions of Sidekiq's multi-threaded behavior, I felt like I needed to better understand threads in Ruby and why they were important.
+
+Searching "threads and Ruby," I found this [blog post](http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/) by Yehuda Katz. 
+> In a threadsafe Rails application, the framework manages threads and uses an environment hash (one per request) to store state. When you work inside a Rails controller, you’re working inside an object that is inherently unshared. When you instantiate a new instance of an ActiveRecord model inside the controller, it is rooted to that controller, and is therefore not used between live threads.
+
+> 
+>  This is significantly less true about applications, like chat servers, that keep open a huge number of requests. In those cases, a lot of the application logic happens outside the individual request, so you need to personally manage shared state.
+
+What I understand from it is that when you have concurrent processes occurring (i.e. threads), you need to identify whether 
+
+
+________
